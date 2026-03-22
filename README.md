@@ -24,7 +24,11 @@ This is a Laravel application using Blade templates and Alpine.js for interactiv
     ```bash
     cp .env.example .env
     php artisan key:generate
-    touch database/database.sqlite
+    ```
+
+    Configure your MySQL database settings in `.env` (DB_CONNECTION, DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD), then run:
+
+    ```bash
     php artisan migrate
     ```
 

@@ -1,0 +1,10 @@
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY3VzdG9tLmNzcyIsInNvdXJjZXMiOlsiY3VzdG9tLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiJ9 */
+
+/* Hide CKEditor 4 security/version notification inside the editor UI */
+.cke_notification_warning,
+.cke_notification.cke_notification_warning {
+    display: none !important;
+}
+
+/*# sourceMappingURL=custom.css.map */

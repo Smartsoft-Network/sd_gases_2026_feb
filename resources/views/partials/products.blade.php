@@ -16,79 +16,67 @@
 
         {{-- Products Grid --}}
         <div class="grid md:grid-cols-3 gap-8">
-            @php
-                $products = [
-                    [
-                        'name' => 'Oxygen Cylinder',
-                        'desc' => 'Lightweight, durable 4-liter water capacity cylinders at 300BAR fill pressure. The lightest on the market.',
-                        'features' => ['4L Water Capacity', '300BAR Pressure', 'Ultra Lightweight'],
-                        'gradient' => 'from-primary/20 to-primary/5',
-                        'link' => route('products.himalayan-oxygen')
-                    ],
-                    [
-                        'name' => 'Oxygen Regulator',
-                        'desc' => 'Precise and reliable regulators designed for extreme high-altitude environments with durable construction.',
-                        'features' => ['Precise Flow Control', 'Durable Build', 'Easy Operation'],
-                        'gradient' => 'from-secondary/20 to-secondary/5',
-                        'link' => route('products.medical-oxygen')
-                    ],
-                    [
-                        'name' => 'Oxygen Mask',
-                        'desc' => 'High-quality aviation-grade masks preferred by high-altitude climbers for comfort and efficiency.',
-                        'features' => ['Aviation Grade', 'Comfortable Fit', 'High Efficiency'],
-                        'gradient' => 'from-primary/15 to-accent/20',
-                        'link' => route('products.emergency-oxygen')
-                    ],
-                ];
-            @endphp
-
-            @foreach($products as $index => $product)
-                <div 
-                    class="group h-full"
-                    x-data="{ shown: false }" 
-                    x-intersect.once="shown = true" 
-                    :class="{ 'opacity-100 translate-y-0': shown, 'opacity-0 translate-y-10': !shown }" 
-                    class="transition-all duration-500 delay-{{ $index * 150 }}"
-                >
-                    <div class="bg-card rounded-2xl overflow-hidden shadow-lg border border-border h-full flex flex-col hover:shadow-xl transition-all duration-300">
-                        {{-- Image placeholder with gradient --}}
-                        <div class="h-48 bg-gradient-to-br {{ $product['gradient'] }} flex items-center justify-center relative overflow-hidden">
-                            <div class="absolute inset-0 bg-gradient-to-t from-card/50 to-transparent"></div>
-                            <div class="w-24 h-24 rounded-full bg-primary/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
-                                <span class="text-4xl font-display font-bold text-primary">O₂</span>
-                            </div>
-                        </div>
-
-                        {{-- Content --}}
-                        <div class="p-6 flex-1 flex flex-col">
-                            <h3 class="text-xl font-display font-bold text-foreground mb-3">
-                                {{ $product['name'] }}
-                            </h3>
-                            <p class="text-muted-foreground mb-4 flex-1">
-                                {{ $product['desc'] }}
-                            </p>
-
-                            {{-- Features --}}
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                @foreach($product['features'] as $feature)
-                                    <span class="px-3 py-1 text-xs font-medium bg-muted text-muted-foreground rounded-full">
-                                        {{ $feature }}
-                                    </span>
-                                @endforeach
+            @if(isset($products) && $products->count() > 0)
+                @foreach($products as $index => $product)
+                    <div 
+                        class="group h-full"
+                        x-data="{ shown: false }" 
+                        x-intersect.once="shown = true" 
+                        :class="{ 'opacity-100 translate-y-0': shown, 'opacity-0 translate-y-10': !shown }" 
+                        class="transition-all duration-500 delay-{{ $index * 150 }}"
+                    >
+                        <div class="bg-card rounded-2xl overflow-hidden shadow-lg border border-border h-full flex flex-col hover:shadow-xl transition-all duration-300">
+                            {{-- Image --}}
+                            <div class="h-48 relative overflow-hidden bg-muted">
+                                @if($product->image_url)
+                                    <img 
+                                        src="{{ $product->image_url }}" 
+                                        alt="{{ $product->title }}" 
+                                        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                                    >
+                                @else
+                                    <div class="w-full h-full flex items-center justify-center bg-primary/10">
+                                        <span class="text-4xl font-display font-bold text-primary">O₂</span>
+                                    </div>
+                                @endif
                             </div>
 
-                            {{-- CTA --}}
-                            <a
-                                href="{{ $product['link'] }}"
-                                class="inline-flex items-center gap-2 text-primary font-semibold group/link"
-                            >
-                                Learn More
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 transition-transform group-hover/link:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                            </a>
+                            {{-- Content --}}
+                            <div class="p-6 flex-1 flex flex-col">
+                                <h3 class="text-xl font-display font-bold text-foreground mb-3">
+                                    {{ $product->title }}
+                                </h3>
+                                <p class="text-muted-foreground mb-4 flex-1 line-clamp-3">
+                                    {{ $product->description['content'] ?? '' }}
+                                </p>
+
+                                {{-- CTA --}}
+                                <a
+                                    href="{{ route('products.show', $product->slug) }}"
+                                    class="inline-flex items-center gap-2 text-primary font-semibold group/link mt-auto"
+                                >
+                                    Learn More
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 transition-transform group-hover/link:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
+                @endforeach
+            @else
+                <div class="col-span-full text-center py-12">
+                    <p class="text-muted-foreground">No products available at the moment.</p>
                 </div>
-            @endforeach
+            @endif
         </div>
+
+        {{-- View All Button --}}
+        @if(isset($products) && $products->count() > 0)
+            <div class="mt-16 text-center">
+                <a href="{{ route('products.index') }}" class="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-full hover:bg-primary-dark transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    View All Products
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+            </div>
+        @endif
     </div>
 </section>

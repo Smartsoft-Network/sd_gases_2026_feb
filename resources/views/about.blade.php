@@ -1,25 +1,23 @@
-@extends('layouts.app')
+@extends('layouts.public')
 
 @section('content')
     <x-page-hero 
-        title="About SD Gases" 
-        subtitle="Nepal's trusted partner for high-quality oxygen solutions since 2010" 
+        title="{{ $aboutData['hero_title'] ?? 'About SD Gases' }}" 
+        :subtitle="$aboutData['hero_subtitle'] ?? 'Nepal\'s trusted partner for high-quality oxygen solutions since 2010'" 
         :breadcrumbs="[['label' => 'About Us']]"
     />
 
     {{-- Mission & Vision --}}
-    <section class="py-20">
+    <section class="py-16">
         <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-2 gap-12">
                 <div class="bg-card p-8 rounded-2xl shadow-lg border border-border">
                     <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-primary"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
                     </div>
-                    <h2 class="text-2xl font-bold text-foreground mb-4 font-display">Our Mission</h2>
+                    <h2 class="text-2xl font-bold text-foreground mb-4 font-display">{{ $aboutData['mission_title'] ?? 'Our Mission' }}</h2>
                     <p class="text-muted-foreground leading-relaxed">
-                        To provide Nepal with the highest quality oxygen solutions for mountaineering, 
-                        medical, and industrial applications. We are committed to safety, reliability, 
-                        and supporting life-saving operations across the Himalayas and beyond.
+                        {{ $aboutData['mission_content'] ?? '' }}
                     </p>
                 </div>
 
@@ -27,11 +25,9 @@
                     <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-primary"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                     </div>
-                    <h2 class="text-2xl font-bold text-foreground mb-4 font-display">Our Vision</h2>
+                    <h2 class="text-2xl font-bold text-foreground mb-4 font-display">{{ $aboutData['vision_title'] ?? 'Our Vision' }}</h2>
                     <p class="text-muted-foreground leading-relaxed">
-                        To be the leading oxygen solutions provider in the Himalayan region, 
-                        recognized for excellence in service, innovation in technology, and 
-                        unwavering commitment to the safety of mountaineers and patients alike.
+                        {{ $aboutData['vision_content'] ?? '' }}
                     </p>
                 </div>
             </div>
@@ -39,15 +35,15 @@
     </section>
 
     {{-- Company History --}}
-    <section class="py-20 bg-muted/30">
+    <section class="py-16 bg-muted/30">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
+            <div class="text-center mb-10">
                 <div class="flex items-center justify-center gap-3 mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-primary"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
-                    <span class="text-primary font-semibold uppercase tracking-wider text-sm">Our Journey</span>
+                    <span class="text-primary font-semibold uppercase tracking-wider text-sm">{{ $aboutData['journey_subtitle'] ?? 'Our Journey' }}</span>
                 </div>
                 <h2 class="text-3xl md:text-4xl font-bold text-foreground font-display">
-                    A Legacy of Excellence
+                    {{ $aboutData['journey_title'] ?? 'A Legacy of Excellence' }}
                 </h2>
             </div>
 
@@ -57,14 +53,7 @@
                 
                 <div class="space-y-12">
                     @php
-                        $milestones = [
-                            ['year' => '2010', 'title' => 'Company Founded', 'desc' => 'SD Gases established in Patan Dhoka, Lalitpur'],
-                            ['year' => '2012', 'title' => 'First Himalayan Expedition', 'desc' => 'Supplied oxygen for Mount Everest expedition'],
-                            ['year' => '2015', 'title' => 'Helicopter Rescue Partner', 'desc' => 'Became official partner for helicopter rescue operations'],
-                            ['year' => '2018', 'title' => 'Medical Gas Division', 'desc' => 'Expanded to medical oxygen supply'],
-                            ['year' => '2020', 'title' => 'COVID-19 Response', 'desc' => 'Played vital role in medical oxygen supply during pandemic'],
-                            ['year' => '2023', 'title' => 'Nationwide Presence', 'desc' => 'Established distribution network across Nepal'],
-                        ];
+                        $milestones = $aboutData['milestones'] ?? [];
                     @endphp
 
                     @foreach($milestones as $index => $milestone)

@@ -20,9 +20,9 @@
             <div class="lg:col-span-2 space-y-6">
                 @php
                     $contactInfo = [
-                        ['icon' => 'Phone', 'title' => 'Phone', 'value' => '+01-5533950', 'link' => 'tel:+01-5533950'],
-                        ['icon' => 'Mail', 'title' => 'Email', 'value' => 'sdgases.mgmt@gmail.com', 'link' => 'mailto:sdgases.mgmt@gmail.com'],
-                        ['icon' => 'MapPin', 'title' => 'Location', 'value' => 'Patan Dhoka, Lalitpur, Nepal', 'link' => '#'],
+                        ['icon' => 'Phone', 'title' => 'Phone', 'value' => $generalData['contact_phone'] ?? '', 'link' => 'tel:' . ($generalData['contact_phone'] ?? '')],
+                        ['icon' => 'Mail', 'title' => 'Email', 'value' => $generalData['contact_email'] ?? '', 'link' => 'mailto:' . ($generalData['contact_email'] ?? '')],
+                        ['icon' => 'MapPin', 'title' => 'Location', 'value' => $generalData['address'] ?? '', 'link' => '#'],
                         ['icon' => 'Clock', 'title' => 'Hours', 'value' => 'Sun - Fri: 9AM - 6PM', 'link' => '#'],
                     ];
                 @endphp

@@ -2,12 +2,15 @@
     {{-- Background --}}
     <div class="absolute inset-0">
         <img
-            src="https://sdgases.com.np/assets/img/hero-bg.jpg"
+            src="{{ isset($bannerData['banner_image']) ? asset('storage/' . $bannerData['banner_image']) : 'https://sdgases.com.np/assets/img/hero-bg.jpg' }}"
             alt="SD Gases Hero"
             class="w-full h-full object-cover"
         />
         <div class="absolute inset-0 bg-gradient-to-r from-secondary/95 via-secondary/80 to-secondary/40"></div>
     </div>
+
+    {{-- Ripple Canvas --}}
+    <canvas id="hero-ripple-canvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-60"></canvas>
 
     {{-- Floating elements (Simplified CSS animation) --}}
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
@@ -15,22 +18,21 @@
         <div class="absolute bottom-1/4 right-1/3 w-48 h-48 bg-primary/20 rounded-full blur-2xl animate-pulse delay-1000"></div>
     </div>
 
-    <div class="container mx-auto px-4 relative z-10">
+    <div class="container mx-auto px-4 relative z-10 pointer-events-none">
         <div class="max-w-3xl">
             {{-- Badge --}}
             <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 backdrop-blur-sm border border-primary/30 rounded-full text-primary-foreground mb-6 animate-fade-in-up">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
-                <span class="text-sm font-medium">Nepal's Leading Oxygen Provider</span>
+                <span class="text-sm font-medium">{{ $bannerData['banner_badge'] ?? "Nepal's Leading Oxygen Provider" }}</span>
             </div>
 
             {{-- Heading --}}
             <h1 class="text-4xl md:text-5xl lg:text-7xl font-display font-bold text-white leading-tight mb-6 animate-fade-in-up delay-100">
-                Breathe Higher, <span class="text-primary">Climb Beyond</span>
+                {!! str_replace('Climb Beyond', '<span class="text-primary">Climb Beyond</span>', $bannerData['banner_title'] ?? 'Breathe Higher, Climb Beyond') !!}
             </h1>
 
             <p class="text-lg md:text-xl text-white/80 mb-8 max-w-2xl animate-fade-in-up delay-200">
-                High-pressure aviation-grade medical oxygen systems for Himalayan mountaineering. 
-                15+ years of excellence with 80% market share in Nepal's mountaineering oxygen sector.
+                {!! $bannerData['banner_subtitle'] ?? "High-pressure aviation-grade medical oxygen systems for Himalayan mountaineering. 15+ years of excellence with 80% market share in Nepal's mountaineering oxygen sector." !!}
             </p>
 
             {{-- CTA Buttons --}}
@@ -52,18 +54,12 @@
 
             {{-- Stats --}}
             <div class="grid grid-cols-3 gap-8 border-t border-white/10 pt-8 animate-fade-in-up delay-500">
-                <div>
-                    <p class="text-3xl md:text-4xl font-bold text-white mb-1">15+</p>
-                    <p class="text-sm text-white/60">Years Experience</p>
-                </div>
-                <div>
-                    <p class="text-3xl md:text-4xl font-bold text-white mb-1">80%</p>
-                    <p class="text-sm text-white/60">Market Share</p>
-                </div>
-                <div>
-                    <p class="text-3xl md:text-4xl font-bold text-white mb-1">24/7</p>
-                    <p class="text-sm text-white/60">Support</p>
-                </div>
+                @foreach($bannerData['banner_stats'] ?? [] as $stat)
+                    <div>
+                        <p class="text-3xl md:text-4xl font-bold text-white mb-1">{{ $stat['value'] }}</p>
+                        <p class="text-sm text-white/60">{{ $stat['label'] }}</p>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>

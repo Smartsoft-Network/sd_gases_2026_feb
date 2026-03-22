@@ -3,7 +3,11 @@
 <div class="relative bg-secondary py-20 lg:py-28 overflow-hidden">
     {{-- Background Pattern --}}
     <div class="absolute inset-0 opacity-10">
-        <div class="absolute inset-0 bg-[url('/images/hero-bg.jpg')] bg-cover bg-center mix-blend-overlay"></div>
+        @if(isset($generalData['inner_hero_image']))
+            <div class="absolute inset-0 bg-cover bg-center mix-blend-overlay" style="background-image: url('{{ asset('storage/' . $generalData['inner_hero_image']) }}');"></div>
+        @else
+            <div class="absolute inset-0 bg-cover bg-center mix-blend-overlay" style="background-image: url('{{ asset('images/hero-bg.jpg') }}');"></div>
+        @endif
     </div>
     
     {{-- Decorative Elements --}}
@@ -31,7 +35,7 @@
             
             @if($subtitle)
                 <p class="text-xl text-secondary-foreground/80 max-w-2xl leading-relaxed">
-                    {{ $subtitle }}
+                    {!! $subtitle !!}
                 </p>
             @endif
         </div>

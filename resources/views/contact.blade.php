@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.public')
 
 @section('content')
     <x-page-hero 
@@ -26,9 +26,9 @@
                     <div class="space-y-6">
                         @php
                             $contactInfo = [
-                                ['icon' => 'phone', 'label' => 'Phone', 'value' => '+01-5533950', 'href' => 'tel:+01-5533950'],
-                                ['icon' => 'mail', 'label' => 'Email', 'value' => 'sdgases.mgmt@gmail.com', 'href' => 'mailto:sdgases.mgmt@gmail.com'],
-                                ['icon' => 'map-pin', 'label' => 'Address', 'value' => 'Patan Dhoka, Lalitpur, Nepal', 'href' => '#'],
+                                ['icon' => 'phone', 'label' => 'Phone', 'value' => $generalData['contact_phone'] ?? '', 'href' => 'tel:' . ($generalData['contact_phone'] ?? '')],
+                                ['icon' => 'mail', 'label' => 'Email', 'value' => $generalData['contact_email'] ?? '', 'href' => 'mailto:' . ($generalData['contact_email'] ?? '')],
+                                ['icon' => 'map-pin', 'label' => 'Address', 'value' => $generalData['address'] ?? '', 'href' => '#'],
                                 ['icon' => 'clock', 'label' => 'Hours', 'value' => 'Sun-Fri: 9AM - 6PM', 'href' => '#'],
                             ];
                         @endphp
@@ -62,36 +62,43 @@
                     </div>
 
                     {{-- Map --}}
-                    <div 
-                        x-data="{ shown: false }"
-                        x-intersect.once="shown = true"
-                        :class="shown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'"
-                        class="mt-8 rounded-xl overflow-hidden shadow-lg transition-all duration-700 ease-out"
-                    >
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.1234567890!2d85.3200000!3d27.6800000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjfCsDQwJzQ4LjAiTiA4NcKwMTknMTIuMCJF!5e0!3m2!1sen!2snp!4v1234567890"
-                            width="100%"
-                            height="200"
-                            style="border: 0;"
-                            allowfullscreen=""
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"
-                            title="SD Gases Location"
-                        ></iframe>
-                    </div>
+                    @if(!empty($generalData['google_maps_url']))
+                        <div 
+                            x-data="{ shown: false }"
+                            x-intersect.once="shown = true"
+                            :class="shown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'"
+                            class="mt-8 rounded-xl overflow-hidden shadow-lg transition-all duration-700 ease-out"
+                        >
+                            <iframe
+                                src="{{ $generalData['google_maps_url'] }}"
+                                width="100%"
+                                height="200"
+                                style="border: 0;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="SD Gases Location"
+                            ></iframe>
+                        </div>
+                    @endif
                 </div>
 
                 {{-- Contact Form --}}
                 <div 
-                    x-data="{ shown: false }"
+                    x-data="{ shown: false, loading: false }"
                     x-intersect.once="shown = true"
                     :class="shown ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'"
                     class="lg:col-span-2 transition-all duration-700 ease-out"
                 >
                     <div class="bg-card p-8 rounded-2xl shadow-lg border border-border">
-                        <h2 class="text-2xl font-bold text-foreground mb-6 font-display">Send Us a Message</h2>
-                        
-                        <form action="#" method="POST" class="space-y-6" onsubmit="event.preventDefault(); alert('Message sent!');">
+                        <h3 class="text-2xl font-display font-bold text-foreground mb-2">
+                            Send us a Message
+                        </h3>
+                        <p class="text-secondary-foreground/70 mb-8">
+                            Fill out the form below and we'll get back to you within 24 hours.
+                        </p>
+
+                        <form action="{{ route('contact.store') }}" method="POST" class="space-y-6" x-on:submit="loading = true">
                             @csrf
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
@@ -173,10 +180,24 @@
 
                             <button
                                 type="submit"
-                                class="w-full md:w-auto px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(239,68,68,0.3)] hover:shadow-[0_0_30px_rgba(239,68,68,0.5)] transform active:scale-95"
+                                :disabled="loading"
+                                class="w-full md:w-auto px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(239,68,68,0.3)] hover:shadow-[0_0_30px_rgba(239,68,68,0.5)] transform active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                                Send Message
+                                <template x-if="!loading">
+                                    <div class="flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                                        <span>Send Message</span>
+                                    </div>
+                                </template>
+                                <template x-if="loading">
+                                    <div class="flex items-center gap-2">
+                                        <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                        <span>Sending...</span>
+                                    </div>
+                                </template>
                             </button>
                         </form>
                     </div>
