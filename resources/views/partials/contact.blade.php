@@ -8,7 +8,7 @@
                 Contact Us
             </span>
             <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground mb-4">
-                Get In <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">Touch</span>
+                Get In <span class="gradient-text-title">Touch</span>
             </h2>
             <p class="text-lg text-muted-foreground">
                 Ready to plan your expedition? Contact us for quotes, inquiries, or any questions.

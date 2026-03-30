@@ -1,7 +1,7 @@
 {{-- Top bar --}}
 <div class="bg-secondary text-secondary-foreground py-2 text-sm hidden md:block">
     <div class="container mx-auto px-4 flex justify-between items-center">
-        <div class="flex items-center gap-6">
+        <div class="flex items-center gap-6" style="color: rgb(225, 225, 225);">
             <a href="mailto:{{ $generalData['contact_email'] ?? '' }}" class="flex items-center gap-2 hover:text-primary transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                 {{ $generalData['contact_email'] ?? '' }}
@@ -11,7 +11,7 @@
                 {{ $generalData['contact_phone'] ?? '' }}
             </a>
         </div>
-        <p class="text-muted-foreground">{{ $generalData['address'] ?? '' }}</p>
+        <p class="text-sm" style="color: rgb(219, 219, 219);">{{ $generalData['address'] ?? '' }}</p>
     </div>
 </div>
 

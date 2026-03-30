@@ -6,7 +6,7 @@
                 Our Products
             </span>
             <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground mb-4">
-                Premium <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">Oxygen Equipment</span>
+                Premium <span class="gradient-text-title to-accent">Oxygen Equipment</span>
             </h2>
             <p class="text-lg text-muted-foreground">
                 Explore our high-quality oxygen equipment, designed for professionals 

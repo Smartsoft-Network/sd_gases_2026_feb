@@ -227,6 +227,18 @@
             height: 25px;
             fill: white;
         }
+
+        .gradient-text-title {
+
+            background: linear-gradient(270deg, #fd7488, #f84f6b, #b82a46);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            text-shadow:
+                /* 1px 1px 0 #b91c3b3d,
+                2px 2px 0 #991b1b52, */
+                3px 3px 5px #991b1b16;
+        }
     </style>
 </head>
 

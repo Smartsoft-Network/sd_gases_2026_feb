@@ -10,7 +10,7 @@
                     About SD Gases
                 </span>
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground mb-6 leading-tight">
-                    {!! str_replace('Oxygen Systems', '<span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">Oxygen Systems</span>', $aboutData['home_about_title'] ?? "Nepal's Premier Oxygen Systems Provider") !!}
+                    {!! str_ireplace('Oxygen Systems', '<span class="gradient-text-title">Oxygen Systems</span>', $aboutData['home_about_title'] ?? "Nepal's Premier Oxygen Systems Provider") !!}
                 </h2>
                 @foreach($aboutData['home_about_descriptions'] ?? [] as $desc)
                     <p class="{{ $loop->first ? 'text-lg' : '' }} text-muted-foreground mb-6 leading-relaxed">
