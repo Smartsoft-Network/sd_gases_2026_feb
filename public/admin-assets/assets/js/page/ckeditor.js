@@ -1,8 +1,10 @@
 'use strict';
 $(function () {
   //CKEditor
-  CKEDITOR.replace('ckeditor');
-  CKEDITOR.config.height = 300;
+  CKEDITOR.replace('ckeditor', {
+    height: 300,
+    removePlugins: 'exportpdf'
+  });
 
   if (window.CodeMirror) {
     $(".codeeditor").each(function () {
