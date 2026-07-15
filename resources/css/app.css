@@ -89,3 +89,282 @@
     @apply mx-auto;
   }
 }
+
+/* Login Page Styles - Scoped to .login-root */
+.login-root {
+    background: #fff;
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.login-root * {
+    padding: 0;
+    margin: 0;
+    color: #1a1f36;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Ubuntu,sans-serif;
+}
+
+.login-root body {
+    min-height: 100%;
+    background-color: #ffffff;
+}
+
+.login-root h1 {
+    letter-spacing: -1px;
+}
+
+.login-root a {
+    color: hsl(350, 89%, 60%);
+    text-decoration: unset;
+}
+
+.login-root .loginbackground {
+    min-height: 692px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.login-root .flex-flex {
+    display: flex;
+}
+
+.login-root .align-center {
+    align-items: center;
+}
+
+.login-root .center-center {
+    align-items: center;
+    justify-content: center;
+}
+
+.login-root .box-root {
+    box-sizing: border-box;
+}
+
+.login-root .flex-direction--column {
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.login-root .loginbackground-gridContainer {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: [start] 1fr [left-gutter] (86.6px)[16] [left-gutter] 1fr [end];
+    grid-template-columns: [start] 1fr [left-gutter] repeat(16,86.6px) [left-gutter] 1fr [end];
+    -ms-grid-rows: [top] 1fr [top-gutter] (64px)[8] [bottom-gutter] 1fr [bottom];
+    grid-template-rows: [top] 1fr [top-gutter] repeat(8,64px) [bottom-gutter] 1fr [bottom];
+    justify-content: center;
+    margin: 0 -2%;
+    transform: rotate(-12deg) skew(-12deg);
+}
+
+.login-root .box-divider--light-all-2 {
+    box-shadow: inset 0 0 0 2px #fef2f2;
+}
+
+.login-root .box-background--blue {
+    background-color: hsl(350, 89%, 60%);
+}
+
+.login-root .box-background--white {
+    background-color: #ffffff;
+}
+
+.login-root .box-background--blue800 {
+    background-color: hsl(350, 89%, 30%);
+}
+
+.login-root .box-background--gray100 {
+    background-color: #fee2e2;
+}
+
+.login-root .box-background--cyan200 {
+    background-color: #fecaca;
+}
+
+.login-root .padding-top--64 {
+    padding-top: 64px;
+}
+
+.login-root .padding-top--24 {
+    padding-top: 24px;
+}
+
+.login-root .padding-top--48 {
+    padding-top: 48px;
+}
+
+.login-root .padding-bottom--24 {
+    padding-bottom: 24px;
+}
+
+.login-root .padding-horizontal--48 {
+    padding: 48px;
+}
+
+.login-root .padding-bottom--15 {
+    padding-bottom: 15px;
+}
+
+.login-root .flex-justifyContent--center {
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.login-root .formbg {
+    margin: 0px auto;
+    width: 100%;
+    max-width: 448px;
+    background: white;
+    border-radius: 4px;
+    box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+}
+
+.login-root span {
+    display: block;
+    font-size: 20px;
+    line-height: 28px;
+    color: #1a1f36;
+}
+
+.login-root label {
+    margin-bottom: 10px;
+}
+
+.login-root .reset-pass a,
+.login-root label {
+    font-size: 14px;
+    font-weight: 600;
+    display: block;
+}
+
+.login-root .reset-pass > a {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.login-root .grid--50-50 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+}
+
+.login-root .field input {
+    font-size: 16px;
+    line-height: 28px;
+    padding: 8px 16px;
+    width: 100%;
+    min-height: 44px;
+    border: unset;
+    border-radius: 4px;
+    outline-color: hsl(350, 89%, 60%, 0.5);
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+                rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+}
+
+.login-root input[type="submit"] {
+    background-color: hsl(350, 89%, 60%);
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+                rgba(0, 0, 0, 0.12) 0px 1px 1px 0px,
+                hsl(350, 89%, 60%) 0px 0px 0px 1px,
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+                rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.login-root .field-checkbox input[type="checkbox"] {
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    min-height: 18px !important;
+    margin: 0 8px 0 0 !important;
+    padding: 0 !important;
+    box-shadow: rgba(60, 66, 87, 0.16) 0px 0px 0px 1px !important;
+    accent-color: hsl(350, 89%, 60%);
+    border: unset !important;
+    border-radius: 3px !important;
+    cursor: pointer;
+    appearance: auto !important;
+}
+
+.login-root .field-checkbox label {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.login-root a.ssolink {
+    display: block;
+    text-align: center;
+    font-weight: 600;
+}
+
+.login-root .footer-link span {
+    font-size: 14px;
+    text-align: center;
+}
+
+.login-root .listing a {
+    color: #697386;
+    font-weight: 600;
+    margin: 0 10px;
+}
+
+.login-root .animationRightLeft {
+    animation: login-animationRightLeft 2s ease-in-out infinite;
+}
+
+.login-root .animationLeftRight {
+    animation: login-animationLeftRight 2s ease-in-out infinite;
+}
+
+.login-root .tans3s {
+    animation: login-animationLeftRight 3s ease-in-out infinite;
+}
+
+.login-root .tans4s {
+    animation: login-animationLeftRight 4s ease-in-out infinite;
+}
+
+@keyframes login-animationLeftRight {
+    0% {
+        transform: translateX(0px);
+    }
+    50% {
+        transform: translateX(1000px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+@keyframes login-animationRightLeft {
+    0% {
+        transform: translateX(0px);
+    }
+    50% {
+        transform: translateX(-1000px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}

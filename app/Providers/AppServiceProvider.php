@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Service;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 
 use App\Models\Setting;
 use App\Models\Message;
@@ -26,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        RedirectIfAuthenticated::redirectUsing(function () {
+            return route('admin.dashboard');
+        });
+
         // Use a static variable to avoid multiple table checks
         static $hasSettingsTable = null;
         if ($hasSettingsTable === null) {
